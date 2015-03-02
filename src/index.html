@@ -344,15 +344,20 @@
 					/*
 					 * Custom Javascript to be executed when the application is ready goes here
 					 */
+					setTimeout(function(){
+						$('.legendMobile').append('<img class="legend-img" src="resources/legends/DroneLegendMap' + 0 + '.png" alt="Legend">');
+					},1000);
 				});
 
 				topic.subscribe("story-load-entry", function(index){
 					$('.legend-img').remove();
+					$('.legend .content, .legendMobile').append('<img class="legend-img" src="resources/legends/DroneLegendMap' + index + '.png" alt="Legend">');
 			  });
 
 				topic.subscribe("story-loaded-map", function(result){
-			    if ( result.index !== null )
-					$('.legend .content').append('<img class="legend-img" src="resources/legends/DroneLegendMap' + result.index + '.png" alt="Legend">');
+			    if ( result.index == 0 && $('.legend-img').length < 1 ){
+						$('.legend .content').append('<img class="legend-img" src="resources/legends/DroneLegendMap' + result.index + '.png" alt="Legend">');
+					}
 			  });
 
 			});
